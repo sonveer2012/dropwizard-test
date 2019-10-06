@@ -1,3 +1,23 @@
-.idea
 *.iml
-target/*
+.idea/
+*.ipr
+*.iws
+*/.classpath
+*/.settings
+*/.project
+.project
+.settings
+.DS_Store
+.metadata/
+nohup.out
+# Java compiled files
+*/target/
+*.class
+Document.html
+# Built files
+build/*.zip
+*.jar
+docs/deploy
+docs/.hyde_deps
+target/
+~                
