@@ -53,7 +53,6 @@ public class App extends Application<Configuration> {
         e.jersey().register(new HealthCheckController(e.healthChecks()));
 
 
-
         e.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(new AppBasicAuthenticator())
                 .setAuthorizer(new AppAuthorizer())
