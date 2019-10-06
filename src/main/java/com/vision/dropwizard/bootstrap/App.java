@@ -38,28 +38,28 @@ public class App extends Application<Configuration> {
     }
 
     @Override
-    public void run(Configuration c, Environment e) throws Exception {
+    public void run(Configuration c, Environment environment) throws Exception {
         log.info("Registering REST resources");
-        e.jersey().register(new EmployeeRESTController(e.getValidator()));
+        environment.jersey().register(new EmployeeRESTController(environment.getValidator()));
         //Now we added REST Client Resource named RESTClientController
 
-        final Client client = new JerseyClientBuilder(e).build("sonveerrestClient");
-        e.jersey().register(new RESTClientController(client));
+        final Client client = new JerseyClientBuilder(environment).build("sonveerrestClient");
+        environment.jersey().register(new RESTClientController(client));
 
         //Application health check
-        e.healthChecks().register("APIHealthCheck", new AppHealthCheck(client));
+        environment.healthChecks().register("APIHealthCheck", new AppHealthCheck(client));
 
         //Run multiple health checks
-        e.jersey().register(new HealthCheckController(e.healthChecks()));
+        environment.jersey().register(new HealthCheckController(environment.healthChecks()));
 
 
-        e.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
+        environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(new AppBasicAuthenticator())
                 .setAuthorizer(new AppAuthorizer())
                 .setRealm("BASIC-AUTH-REALM")
                 .buildAuthFilter()));
-        e.jersey().register(RolesAllowedDynamicFeature.class);
-        e.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
 
 
     }
