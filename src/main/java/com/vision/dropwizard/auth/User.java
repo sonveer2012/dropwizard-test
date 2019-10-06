@@ -4,6 +4,7 @@ package com.vision.dropwizard.auth;
  * @author sonveer.narwaria on 06/10/19
  * @project dropwizard-pipeline
  */
+
 import java.security.Principal;
 import java.util.Set;
 

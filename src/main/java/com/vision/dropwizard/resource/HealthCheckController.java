@@ -4,6 +4,7 @@ package com.vision.dropwizard.resource;
  * @author sonveer.narwaria on 06/10/19
  * @project dropwizard-pipeline
  */
+
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -17,8 +18,7 @@ import com.codahale.metrics.health.HealthCheckRegistry;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/status")
-public class HealthCheckController
-{
+public class HealthCheckController {
     private HealthCheckRegistry registry;
 
     public HealthCheckController(HealthCheckRegistry registry) {
@@ -26,7 +26,7 @@ public class HealthCheckController
     }
 
     @GET
-    public Set<Entry<String, Result>> getStatus(){
+    public Set<Entry<String, Result>> getStatus() {
         return registry.runHealthChecks().entrySet();
     }
 }

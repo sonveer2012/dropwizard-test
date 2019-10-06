@@ -5,14 +5,17 @@ package com.vision.dropwizard.resource;
  * @project dropwizard-pipeline
  */
 
+import com.vision.dropwizard.auth.User;
 import com.vision.dropwizard.model.Employee;
 import com.vision.dropwizard.services.EmployeeDB;
+import io.dropwizard.auth.Auth;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.annotation.security.PermitAll;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.DELETE;
@@ -37,7 +40,8 @@ public class EmployeeRESTController {
     }
 
     @GET
-    public Response getEmployees() {
+    @PermitAll
+    public Response getEmployees(@Auth User user) {
         return Response.ok(EmployeeDB.getEmployees()).build();
     }
 

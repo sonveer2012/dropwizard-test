@@ -22,12 +22,12 @@ public class AppHealthCheck extends HealthCheck {
 
     @Override
     protected Result check() throws Exception {
-        WebTarget webTarget = client.target("http://localhost:"+PORT+"/employees");
-        Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
+        WebTarget webTarget = client.target("http://localhost:" + PORT + "/employees");
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         @SuppressWarnings("rawtypes")
         ArrayList employees = response.readEntity(ArrayList.class);
-        if(employees !=null && employees.size() > 0){
+        if (employees != null && employees.size() > 0) {
             return Result.healthy();
         }
         return Result.unhealthy("API Failed");
