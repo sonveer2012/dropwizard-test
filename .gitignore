@@ -20,4 +20,4 @@ build/*.zip
 docs/deploy
 docs/.hyde_deps
 target/
-~                
+~
