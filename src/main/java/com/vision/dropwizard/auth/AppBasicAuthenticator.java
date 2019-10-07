@@ -19,15 +19,15 @@ import com.google.common.collect.ImmutableSet;
 public class AppBasicAuthenticator implements Authenticator<BasicCredentials, User> {
     private static final Map<String, Set<String>> VALID_USERS = ImmutableMap.of(
             "guest", ImmutableSet.of(),
-            "user", ImmutableSet.of("USER"),
-            "admin", ImmutableSet.of("ADMIN", "USER")
+            "sonveer", ImmutableSet.of("sanjana"),
+            "sanjana", ImmutableSet.of("sanjana", "sonveer")
     );
 
     @Override
     public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
-        if (VALID_USERS.containsKey(credentials.getUsername()) && "password".equals(credentials.getPassword())) {
+        if (VALID_USERS.containsKey(credentials.getUsername()) && VALID_USERS.get(credentials.getUsername()).contains(credentials.getPassword())) {
             return Optional.of(new User(credentials.getUsername(), VALID_USERS.get(credentials.getUsername())));
         }
         return Optional.empty();
-    }
+    }/**/
 }

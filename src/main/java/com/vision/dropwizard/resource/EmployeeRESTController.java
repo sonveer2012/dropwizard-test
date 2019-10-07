@@ -18,19 +18,14 @@ import java.util.Set;
 import javax.annotation.security.PermitAll;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 @Path("/employees")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class EmployeeRESTController {
 
     private final Validator validator;
@@ -57,7 +52,6 @@ public class EmployeeRESTController {
 
     @POST
     public Response createEmployee(Employee employee) throws URISyntaxException {
-        // validation
         Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
         Employee e = EmployeeDB.getEmployee(employee.getId());
         if (violations.size() > 0) {

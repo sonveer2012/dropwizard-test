@@ -16,9 +16,10 @@ public class EmployeeDB {
     public static HashMap<Integer, Employee> employees = new HashMap<>();
 
     static {
-        employees.put(1, new Employee(1, "Lokesh", "Gupta", "India"));
-        employees.put(2, new Employee(2, "John", "Gruber", "USA"));
-        employees.put(3, new Employee(3, "Melcum", "Marshal", "AUS"));
+        employees.put(1, new Employee(1, "Sanjana", "Singh", "IND"));
+        employees.put(2, new Employee(2, "Sapna", "Sharma", "IND"));
+        employees.put(3, new Employee(3, "Ankita", "Katare", "IND"));
+        employees.put(4, new Employee(4, "Shakshi", "Bhadouriya", "IND"));
     }
 
     public static List<Employee> getEmployees() {

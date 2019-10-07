@@ -7,6 +7,8 @@ package com.vision.dropwizard.resource;
 
 import com.vision.dropwizard.model.Employee;
 
+import static com.vision.dropwizard.utils.Constants.PORT;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,7 +20,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
-import static com.vision.dropwizard.utils.Constants.PORT;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/client/")
@@ -32,7 +33,6 @@ public class RESTClientController {
     @GET
     @Path("/employees/")
     public Response getEmployees() {
-        //Do not hard code in your application
         WebTarget webTarget = client.target("http://localhost:" + PORT + "/employees");
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
@@ -44,8 +44,7 @@ public class RESTClientController {
     @GET
     @Path("/employees/{id}")
     public Response getEmployeeById(@PathParam("id") int id) {
-        //Do not hard code in your application
-        WebTarget webTarget = client.target("http://localhost:" + PORT + "/employees" + id);
+        WebTarget webTarget = client.target("http://localhost:" + PORT + "/employees/" + id);
         Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         Employee employee = response.readEntity(Employee.class);

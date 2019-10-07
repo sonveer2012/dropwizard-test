@@ -13,32 +13,25 @@ import com.vision.dropwizard.resource.EmployeeRESTController;
 import com.vision.dropwizard.resource.HealthCheckController;
 import com.vision.dropwizard.resource.RESTClientController;
 import io.dropwizard.Application;
-import io.dropwizard.Configuration;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
-import io.dropwizard.client.HttpClientBuilder;
+import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.HttpClient;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import io.dropwizard.client.JerseyClientBuilder;
-import io.dropwizard.setup.Environment;
-
 import javax.ws.rs.client.Client;
 
 @Slf4j
-public class App extends Application<Configuration> {
+public class App extends Application<VisionConfiguration> {
 
     @Override
-    public void initialize(Bootstrap<Configuration> b) {
+    public void initialize(Bootstrap<VisionConfiguration> b) {
     }
 
     @Override
-    public void run(Configuration c, Environment environment) throws Exception {
+    public void run(VisionConfiguration c, Environment environment) throws Exception {
         log.info("Registering REST resources");
         environment.jersey().register(new EmployeeRESTController(environment.getValidator()));
         //Now we added REST Client Resource named RESTClientController
@@ -60,7 +53,6 @@ public class App extends Application<Configuration> {
                 .buildAuthFilter()));
         environment.jersey().register(RolesAllowedDynamicFeature.class);
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
-
 
     }
 
