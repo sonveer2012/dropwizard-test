@@ -18,7 +18,6 @@ public class EmployeeDB {
     static {
         employees.put(1, new Employee(1, "Sanjana", "Singh", "IND"));
         employees.put(2, new Employee(2, "Sapna", "Sharma", "IND"));
-        employees.put(3, new Employee(3, "Ankita", "Katare", "IND"));
         employees.put(4, new Employee(4, "Shakshi", "Bhadouriya", "IND"));
     }
 
