@@ -53,7 +53,6 @@ public class EmployeeRESTController {
     @POST
     public Response createEmployee(Employee employee) throws URISyntaxException {
         Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
-        Employee e = EmployeeDB.getEmployee(employee.getId());
         if (violations.size() > 0) {
             ArrayList<String> validationMessages = new ArrayList<String>();
             for (ConstraintViolation<Employee> violation : violations) {
@@ -61,7 +60,7 @@ public class EmployeeRESTController {
             }
             return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
         }
-        if (e != null) {
+        if (EmployeeDB.getEmployee(employee.getId()) == null) {
             EmployeeDB.updateEmployee(employee.getId(), employee);
             return Response.created(new URI("/employees/" + employee.getId()))
                     .build();
